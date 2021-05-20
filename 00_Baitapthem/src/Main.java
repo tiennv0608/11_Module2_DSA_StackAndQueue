@@ -14,6 +14,7 @@ public class Main {
         System.out.println(list.searchByName("Hiệu"));
         list.deleteByName("Như Anh");
         list.display();
-
+        list.sortByName();
+        list.display();
     }
 }
