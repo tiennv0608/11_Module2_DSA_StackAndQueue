@@ -39,17 +39,22 @@ public class Main {
                     case 3:
                         System.out.println("Enter name you want to edit:");
                         name = scanner.nextLine();
-                        do {
-                            System.out.println("Position you want to edit");
-                            list.showMenuOfficier();
-                            option = scanner.nextInt();
-                            scanner.nextLine();
-                            if (option < 1 || option > 3) {
-                                System.out.println("Wrong option, re input (1-3):");
-                            }
-                        } while (option < 1 || option > 3);
-                        officier = list.createOfficier(option);
-                        list.editByName(name, officier);
+                        index = list.searchByName(name);
+                        if (index == -1) {
+                            System.out.println("There is no officier in the list!");
+                        } else {
+                            do {
+                                System.out.println("Position you want to edit");
+                                list.showMenuOfficier();
+                                option = scanner.nextInt();
+                                scanner.nextLine();
+                                if (option < 1 || option > 3) {
+                                    System.out.println("Wrong option, re input (1-3):");
+                                }
+                            } while (option < 1 || option > 3);
+                            officier = list.createOfficier(option);
+                            list.editByName(name, officier);
+                        }
                         break;
                     case 4:
                         list.display();
