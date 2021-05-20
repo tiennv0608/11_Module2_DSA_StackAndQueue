@@ -20,6 +20,6 @@ public class Engineer extends Officier {
     @Override
     public String toString() {
         return "Engineer {" + super.toString() +
-                ", specialize: '" + specialize + '\'';
+                ", specialize: '" + specialize + '\'' + "}";
     }
 }

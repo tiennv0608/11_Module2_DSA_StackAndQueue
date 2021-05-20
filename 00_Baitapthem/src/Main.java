@@ -4,17 +4,70 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         OfficierManager list = new OfficierManager();
-        Officier officier1 = new Worker("Như Anh",20,"Nam","TB",10);
-        Officier officier2 = new Engineer("Hiệu",30,"Nam","HN","IT");
-        Officier officier3 = new Staff("Linh",25,"Nữ","ND","Sales");
-        list.add(officier1);
-        list.add(officier2);
-        list.add(officier3);
-        list.display();
-        System.out.println(list.searchByName("Hiệu"));
-        list.deleteByName("Như Anh");
-        list.display();
-        list.sortByName();
-        list.display();
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            list.showMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            if (choice < 0 || choice > 6) {
+                System.out.println("Wrong choice, re input (0-6):");
+            } else {
+                switch (choice) {
+                    case 1:
+                        int option;
+                        do {
+                            list.showMenuOfficier();
+                            option = scanner.nextInt();
+                            scanner.nextLine();
+                            if (option < 1 || option > 3) {
+                                System.out.println("Wrong option, re input (1-3):");
+                            }
+                        } while (option < 1 || option > 3);
+                        Officier officier = list.createOfficier(option);
+                        list.add(officier);
+                        break;
+                    case 2:
+                        System.out.println("Enter name you want to search:");
+                        String name = scanner.nextLine();
+                        int index = list.searchByName(name);
+                        if (index == -1) {
+                            System.out.println("There is no officier in the list!");
+                        } else {
+                            System.out.println(list.getList().get(index));
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Enter name you want to edit:");
+                        name = scanner.nextLine();
+                        do {
+                            System.out.println("Position you want to edit");
+                            list.showMenuOfficier();
+                            option = scanner.nextInt();
+                            scanner.nextLine();
+                            if (option < 1 || option > 3) {
+                                System.out.println("Wrong option, re input (1-3):");
+                            }
+                        } while (option < 1 || option > 3);
+                        officier = list.createOfficier(option);
+                        list.editByName(name, officier);
+                        break;
+                    case 4:
+                        list.display();
+                        break;
+                    case 5:
+                        list.sortByName();
+                        break;
+                    case 6:
+                        System.out.println("Enter name you want to delete:");
+                        name = scanner.nextLine();
+                        list.deleteByName(name);
+                        break;
+                    case 0:
+                        System.exit(0);
+                        break;
+                }
+            }
+        }
+
     }
 }

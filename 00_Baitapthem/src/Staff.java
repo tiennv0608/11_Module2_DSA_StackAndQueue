@@ -20,6 +20,6 @@ public class Staff extends Officier {
     @Override
     public String toString() {
         return "Staff{" + super.toString() +
-                ", job: '" + job + '\'';
+                ", job: '" + job + '\'' + "}";
     }
 }
