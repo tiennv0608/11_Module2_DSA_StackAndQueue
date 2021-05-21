@@ -11,6 +11,9 @@ public class OfficierManager {
         list = new ArrayList<>();
     }
 
+    public ArrayList<Officier> getList() {
+        return list;
+    }
 
     public void display() {
         for (int i = 0; i < list.size(); i++) {
