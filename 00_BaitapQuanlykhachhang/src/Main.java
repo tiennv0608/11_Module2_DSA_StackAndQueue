@@ -14,7 +14,14 @@ public class Main {
                     customerManagement.add(customerManagement.createCustomer());
                     break;
                 case 2:
-
+                    System.out.println("Enter customer ID");
+                    String cusID = scanner.nextLine();
+                    Customer customer = customerManagement.searchCustomer(cusID);
+                    if (customer == null){
+                        System.out.println("There is no customer in the list");
+                    } else {
+                        System.out.println(customer);
+                    }
                     break;
                 case 3:
 
@@ -31,8 +38,10 @@ public class Main {
                 case 0:
                     System.exit(0);
                     break;
+                default:
+                    System.out.println("Wrong input, re input (0-6):");
             }
-        } while (choice>=0 && choice<=6);
+        } while (true);
     }
     static void menu(){
         System.out.println("Customer Management");
