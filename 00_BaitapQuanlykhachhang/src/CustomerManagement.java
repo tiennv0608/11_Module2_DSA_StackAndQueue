@@ -6,7 +6,7 @@ import java.util.Set;
 public class CustomerManagement {
     Map<String, Customer> customerMap = null;
     Scanner scanner = new Scanner(System.in);
-    Set<String> setCusIds = customerMap.keySet();
+    Set<String> setCusIds = null;
 
     public CustomerManagement() {
         customerMap = new HashMap<>();
@@ -21,6 +21,7 @@ public class CustomerManagement {
     }
 
     public void display() {
+        setCusIds = customerMap.keySet();
         for (String cusId : setCusIds) {
             System.out.println(customerMap.get(cusId));
         }
@@ -57,6 +58,7 @@ public class CustomerManagement {
         return new Customer(cusID, name, age, gender, address, job, phone);
     }
     public Customer searchCustomer(String cusID) {
+        setCusIds = customerMap.keySet();
         for (String setCusID: setCusIds){
             if (setCusID.equals(cusID))
             return customerMap.get(setCusID);
