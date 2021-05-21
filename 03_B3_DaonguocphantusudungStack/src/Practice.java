@@ -13,6 +13,7 @@ public class Practice {
             array[j] = stack.pop();
         }
     }
+
     public static String[] reverseStringArray(String string) {
         Stack<String> stack = new Stack<>();
         String[] strings = string.split("\\s");
