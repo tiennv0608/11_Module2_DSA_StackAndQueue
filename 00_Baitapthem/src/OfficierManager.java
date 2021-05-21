@@ -4,35 +4,28 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class OfficierManager {
-    private ArrayList<Officier> list;
+    ArrayList<Officier> list;
     Scanner scanner = new Scanner(System.in);
 
     public OfficierManager() {
-        this.list = new ArrayList<>();
+        list = new ArrayList<>();
     }
 
-    public ArrayList<Officier> getList() {
-        return list;
-    }
-
-    public void setList(ArrayList<Officier> list) {
-        this.list = list;
-    }
 
     public void display() {
-        for (int i = 0; i < this.list.size(); i++) {
-            System.out.println(this.list.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
         }
         System.out.println("----------------------");
     }
 
     public void add(Officier officier) {
-        this.list.add(officier);
+        list.add(officier);
     }
 
     public int searchByName(String name) {
-        for (int i = 0; i < this.list.size(); i++) {
-            if ((this.list.get(i).getName().equals(name))) {
+        for (int i = 0; i < list.size(); i++) {
+            if ((list.get(i).getName().equals(name))) {
                 return i;
             }
         }
@@ -44,7 +37,7 @@ public class OfficierManager {
         if (index == -1) {
             System.out.println("There is no officier in the list!");
         } else {
-            this.list.set(index, officier);
+            list.set(index, officier);
         }
     }
 
@@ -53,12 +46,12 @@ public class OfficierManager {
         if (index == -1) {
             System.out.println("There is no officier in the list!");
         } else {
-            this.list.remove(index);
+            list.remove(index);
         }
     }
 
     public void sortByName() {
-        Collections.sort(this.list, new Comparator<Officier>() {
+        Collections.sort(list, new Comparator<Officier>() {
             @Override
             public int compare(Officier officier1, Officier officier2) {
                 return officier1.getName().compareTo(officier2.getName());
