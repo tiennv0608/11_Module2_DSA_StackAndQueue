@@ -66,18 +66,6 @@ public class OfficierManager {
         });
     }
 
-    public void showMenu() {
-        System.out.println("-------------MENU---------------");
-        System.out.println("1. Add Officier:");
-        System.out.println("2. Search by name:");
-        System.out.println("3. Edit by name:");
-        System.out.println("4. Display:");
-        System.out.println("5. Sort by name:");
-        System.out.println("6. Delete by name");
-        System.out.println("0. Exit");
-        System.out.println("Enter your choice:");
-    }
-
     public Officier createOfficier(int number) {
         Officier officier;
         System.out.println("Enter name:");
@@ -100,18 +88,12 @@ public class OfficierManager {
         } else if (number == 2) {
             System.out.println("Enter specialize:");
             String specialize = scanner.nextLine();
-            officier = new Engineer(name,age,gender,address,specialize);
+            officier = new Engineer(name, age, gender, address, specialize);
         } else {
             System.out.println("Enter job:");
             String job = scanner.nextLine();
-            officier = new Staff(name,age,gender,address,job);
+            officier = new Staff(name, age, gender, address, job);
         }
         return officier;
-    }
-    public void showMenuOfficier(){
-        System.out.println("1. Worker");
-        System.out.println("2. Engineer");
-        System.out.println("3. Staff");
-        System.out.println("Enter option:");
     }
 }

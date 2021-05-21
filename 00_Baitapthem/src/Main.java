@@ -4,10 +4,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         OfficierManager list = new OfficierManager();
+        int choice;
         Scanner scanner = new Scanner(System.in);
-        while (true) {
-            list.showMenu();
-            int choice = scanner.nextInt();
+        do {
+            showMenu();
+            choice = scanner.nextInt();
             scanner.nextLine();
             if (choice < 0 || choice > 6) {
                 System.out.println("Wrong choice, re input (0-6):");
@@ -16,7 +17,7 @@ public class Main {
                     case 1:
                         int option;
                         do {
-                            list.showMenuOfficier();
+                            showMenuOfficier();
                             option = scanner.nextInt();
                             scanner.nextLine();
                             if (option < 1 || option > 3) {
@@ -45,7 +46,7 @@ public class Main {
                         } else {
                             do {
                                 System.out.println("Position you want to edit");
-                                list.showMenuOfficier();
+                                showMenuOfficier();
                                 option = scanner.nextInt();
                                 scanner.nextLine();
                                 if (option < 1 || option > 3) {
@@ -72,7 +73,27 @@ public class Main {
                         break;
                 }
             }
-        }
 
+        } while (choice >= 0 && choice <= 6);
     }
+
+    static void showMenu() {
+        System.out.println("-------------MENU---------------");
+        System.out.println("1. Add Officier:");
+        System.out.println("2. Search by name:");
+        System.out.println("3. Edit by name:");
+        System.out.println("4. Display:");
+        System.out.println("5. Sort by name:");
+        System.out.println("6. Delete by name");
+        System.out.println("0. Exit");
+        System.out.println("Enter your choice:");
+    }
+
+    static void showMenuOfficier() {
+        System.out.println("1. Worker");
+        System.out.println("2. Engineer");
+        System.out.println("3. Staff");
+        System.out.println("Enter option:");
+    }
+
 }
