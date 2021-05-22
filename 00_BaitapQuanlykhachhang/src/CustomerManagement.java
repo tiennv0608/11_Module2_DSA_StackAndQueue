@@ -4,7 +4,7 @@ import java.util.*;
 public class CustomerManagement {
     Map<String, Customer> customerMap = null;
     Scanner scanner = new Scanner(System.in);
-    Set<String> setCusIds = null;
+    Set<String> keys = null;
 
     public CustomerManagement() {
         customerMap = new HashMap<>();
@@ -19,8 +19,8 @@ public class CustomerManagement {
     }
 
     public void display() {
-        setCusIds = customerMap.keySet();
-        for (String cusId : setCusIds) {
+        keys = customerMap.keySet();
+        for (String cusId : keys) {
             System.out.println(customerMap.get(cusId));
         }
     }
@@ -57,10 +57,10 @@ public class CustomerManagement {
     }
 
     public Customer searchCustomer(String cusID) {
-        setCusIds = customerMap.keySet();
-        for (String setCusID : setCusIds) {
-            if (setCusID.equals(cusID))
-                return customerMap.get(setCusID);
+        keys = customerMap.keySet();
+        for (String key : keys) {
+            if (key.equals(cusID))
+                return customerMap.get(key);
         }
         return null;
     }
@@ -104,27 +104,34 @@ public class CustomerManagement {
         scanner.nextLine();
         System.out.println("Enter address");
         String address = scanner.nextLine();
-        if (!address.equals("")){
+        if (!address.equals("")) {
             customer.setAddress(address);
         }
         System.out.println("Enter job");
         String job = scanner.nextLine();
-        if (!job.equals("")){
+        if (!job.equals("")) {
             customer.setJob(job);
         }
-        String phone;
-        do {
-            System.out.println("Enter phone");
-            phone = scanner.nextLine();
-            if (!phone.equals("")){
-                if (phone.length()<10) {
-                    System.out.println("Number phone too short, re input (10 numbers):");
-                } else if (phone.length()>10){
-                    System.out.println("Number phone too long, re input (10 numbers):");
-                } else {
-                    customer.setPhone(phone);
-                }
+        System.out.println("Enter phone");
+        String phone = scanner.nextLine();
+        if (!phone.equals("")) {
+            if (phone.length() < 10) {
+                System.out.println("Number phone too short, re input (10 numbers):");
+            } else if (phone.length() > 10) {
+                System.out.println("Number phone too long, re input (10 numbers):");
+            } else {
+                customer.setPhone(phone);
             }
-        } while (phone.length()!=10);
+        }
+    }
+    public void deleteCustomerByID(){
+        System.out.println("Enter customer ID:");
+        String cusId = scanner.nextLine();
+        Customer customer = searchCustomer(cusId);
+        if (customer==null){
+            System.out.println("No information!");
+        } else {
+            customerMap.remove(cusId);
+        }
     }
 }

@@ -27,13 +27,16 @@ public class Main {
                     customerManagement.sortByName();
                     break;
                 case 4:
-
+                    System.out.println("Enter ID:");
+                    cusID = scanner.nextLine();
+                    customer = customerManagement.searchCustomer(cusID);
+                    customerManagement.editInformation(customer);
                     break;
                 case 5:
                     customerManagement.display();
                     break;
                 case 6:
-
+                    customerManagement.deleteCustomerByID();
                     break;
                 case 0:
                     System.exit(0);
@@ -46,9 +49,9 @@ public class Main {
     static void menu(){
         System.out.println("Customer Management");
         System.out.println("1. Add customer");
-        System.out.println("2. Search customer");
+        System.out.println("2. Search customer by ID");
         System.out.println("3. Sort customer by name");
-        System.out.println("4. Edit customer");
+        System.out.println("4. Edit customer by ID");
         System.out.println("5. Display list customer");
         System.out.println("6. Delete customer");
         System.out.println("0. Exit");
