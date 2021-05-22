@@ -24,7 +24,7 @@ public class Main {
                     }
                     break;
                 case 3:
-
+                    customerManagement.sortByName();
                     break;
                 case 4:
 
@@ -47,7 +47,7 @@ public class Main {
         System.out.println("Customer Management");
         System.out.println("1. Add customer");
         System.out.println("2. Search customer");
-        System.out.println("3. Sort customer");
+        System.out.println("3. Sort customer by name");
         System.out.println("4. Edit customer");
         System.out.println("5. Display list customer");
         System.out.println("6. Delete customer");

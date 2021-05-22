@@ -1,7 +1,5 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
+
 
 public class CustomerManagement {
     Map<String, Customer> customerMap = null;
@@ -57,13 +55,76 @@ public class CustomerManagement {
         } while (phone.length() != 10);
         return new Customer(cusID, name, age, gender, address, job, phone);
     }
+
     public Customer searchCustomer(String cusID) {
         setCusIds = customerMap.keySet();
-        for (String setCusID: setCusIds){
+        for (String setCusID : setCusIds) {
             if (setCusID.equals(cusID))
-            return customerMap.get(setCusID);
+                return customerMap.get(setCusID);
         }
         return null;
     }
 
+    public void sortByName() {
+        List<Map.Entry<String, Customer>> lists = new LinkedList(customerMap.entrySet());
+        Collections.sort(lists, new Comparator<Map.Entry<String, Customer>>() {
+            @Override
+            public int compare(Map.Entry<String, Customer> customer1, Map.Entry<String, Customer> customer2) {
+                return customer1.getValue().getName().compareTo(customer2.getValue().getName());
+            }
+        });
+        Map<String, Customer> listCustomer = new LinkedHashMap<>();
+        for (Map.Entry<String, Customer> list : lists) {
+            listCustomer.put(list.getKey(), list.getValue());
+        }
+        this.customerMap = listCustomer;
+    }
+
+    public void editInformation(Customer customer) {
+        System.out.println("Enter name:");
+        String name = scanner.nextLine();
+        if (!name.equals("")) {
+            customer.setName(name);
+        }
+        System.out.println("Enter age:");
+        int age = scanner.nextInt();
+        if (age > 0 && age <= 100) {
+            customer.setAge(age);
+        }
+        int gender;
+        do {
+            System.out.println("Enter gender (0-1):");
+            gender = scanner.nextInt();
+            if (gender == 1 || gender == 0) {
+                customer.setGender(gender);
+            } else {
+                System.out.println("Wrong input, re input");
+            }
+        } while (gender != 1 && gender != 0);
+        scanner.nextLine();
+        System.out.println("Enter address");
+        String address = scanner.nextLine();
+        if (!address.equals("")){
+            customer.setAddress(address);
+        }
+        System.out.println("Enter job");
+        String job = scanner.nextLine();
+        if (!job.equals("")){
+            customer.setJob(job);
+        }
+        String phone;
+        do {
+            System.out.println("Enter phone");
+            phone = scanner.nextLine();
+            if (!phone.equals("")){
+                if (phone.length()<10) {
+                    System.out.println("Number phone too short, re input (10 numbers):");
+                } else if (phone.length()>10){
+                    System.out.println("Number phone too long, re input (10 numbers):");
+                } else {
+                    customer.setPhone(phone);
+                }
+            }
+        } while (phone.length()!=10);
+    }
 }
