@@ -21,8 +21,8 @@ public class Main {
                 map.put(str, 1);
             }
         }
-        map.forEach((s, a)->{
-            System.out.println(s + ": " + a);
+        map.forEach((key, value)->{
+            System.out.println(key + ": " + value);
         });
     }
 }
