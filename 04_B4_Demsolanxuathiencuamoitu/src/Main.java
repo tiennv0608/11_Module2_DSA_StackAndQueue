@@ -7,10 +7,8 @@ public class Main {
         System.out.println("Nhập vào chuỗi muốn kiểm tra các từ lặp lại: ");
         String string = scanner.nextLine();
 
-        // Tách các từ trong chuỗi vừa nhập
         String[] listChart = string.split(" +");
 
-        // Tạo TreeMap
         TreeMap<String, Integer> map = new TreeMap<>();
         for (String str : listChart) {
             str = str.toLowerCase();

@@ -1,17 +1,12 @@
 import java.util.*;
 
-
 public class CustomerManagement {
-    Map<String, Customer> customerMap = null;
+    Map<String, Customer> customerMap;
     Scanner scanner = new Scanner(System.in);
     Set<String> keys = null;
 
     public CustomerManagement() {
         customerMap = new HashMap<>();
-    }
-
-    public CustomerManagement(Map<String, Customer> customerMap) {
-        this.customerMap = customerMap;
     }
 
     public void add(Customer customer) {
@@ -124,11 +119,12 @@ public class CustomerManagement {
             }
         }
     }
-    public void deleteCustomerByID(){
+
+    public void deleteCustomerByID() {
         System.out.println("Enter customer ID:");
         String cusId = scanner.nextLine();
         Customer customer = searchCustomer(cusId);
-        if (customer==null){
+        if (customer == null) {
             System.out.println("No information!");
         } else {
             customerMap.remove(cusId);
