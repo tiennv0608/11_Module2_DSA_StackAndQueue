@@ -2,7 +2,8 @@ public class Main {
     public static void main(String args[]) {
         Solution solution = new Solution();
         Queue q = new Queue();
-        q.front = q.rear = null;
+        q.setFront(null);
+        q.setRear(null);
 
         solution.enQueue(q, 14);
         solution.enQueue(q, 22);
@@ -10,8 +11,8 @@ public class Main {
 
         solution.displayQueue(q);
 
-        System.out.printf("Deleted value = %d", solution.deQueue(q));
-        System.out.printf("Deleted value = %d", solution.deQueue(q));
+        System.out.println("Deleted value = " + solution.deQueue(q));
+        System.out.println("Deleted value = " + solution.deQueue(q));
 
         solution.displayQueue(q);
 

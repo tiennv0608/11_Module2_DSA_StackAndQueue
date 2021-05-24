@@ -1,6 +1,6 @@
 public class Queue {
-    public Node front;
-    public Node rear;
+    private Node front;
+    private Node rear;
 
     public Queue() {
     }

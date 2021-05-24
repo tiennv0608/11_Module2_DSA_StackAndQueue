@@ -5,44 +5,44 @@ public class Solution {
     public void enQueue(Queue q, int value) {
         Node temp = new Node();
         temp.setData(value);
-        if (q.front == null)
-            q.front = temp;
+        if (q.getFront() == null)
+            q.setFront(temp);
         else
-            q.rear.setLink(temp);
+            q.getRear().setLink(temp);
 
-        q.rear = temp;
-        q.rear.setLink(q.front);
+        q.setRear(temp);
+        q.getRear().setLink(q.getFront());
     }
 
     public int deQueue(Queue q) {
-        if (q.front == null) {
-            System.out.printf("Queue is empty");
+        if (q.getFront() == null) {
+            System.out.println("Queue is empty");
             return Integer.MIN_VALUE;
         }
 
         int value;
-        if (q.front == q.rear) {
-            value = q.front.getData();
-            q.front = null;
-            q.rear = null;
+        if (q.getFront() == q.getRear()) {
+            value = q.getFront().getData();
+            q.setFront(null);
+            q.setRear(null);
         } else {
-            Node temp = q.front;
+            Node temp = q.getFront();
             value = temp.getData();
-            q.front = q.front.getLink();
-            q.rear.setLink(q.front);
+            q.setFront(q.getFront().getLink());
+            q.getRear().setLink(q.getFront());
         }
 
         return value;
     }
 
     public void displayQueue(Queue q) {
-        Node temp = q.front;
-        System.out.printf("Elements in Circular Queue are: ");
-        while (temp.getLink() != q.front) {
-            System.out.printf("%d ", temp.getData());
+        Node temp = q.getFront();
+        System.out.println("Elements in Circular Queue are: ");
+        while (temp.getLink() != q.getFront()) {
+            System.out.println(" "+ temp.getData());
             temp = temp.getLink();
         }
-        System.out.printf("%d", temp.getData());
+        System.out.println(" "+ temp.getData());
     }
 
 }
