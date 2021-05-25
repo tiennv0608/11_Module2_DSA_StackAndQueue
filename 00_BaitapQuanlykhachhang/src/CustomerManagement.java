@@ -23,9 +23,14 @@ public class CustomerManagement {
     }
 
     public void displayCustomerList() {
-        for (Customer customer : customerList) {
-            System.out.println(customer);
+        if (customerList.size() != 0) {
+            for (Customer customer : customerList) {
+                System.out.println(customer);
+            }
+        } else {
+            System.out.println("No Information!");
         }
+
     }
 
     public Customer createCustomer() {
@@ -37,13 +42,13 @@ public class CustomerManagement {
         int age = scanner.nextInt();
         int gender;
         do {
-            System.out.println("Enter customer gender (0.Female/1.Male)");
+            System.out.println("Enter customer gender (1.Male/2.Female)");
             gender = scanner.nextInt();
-            if (gender != 1 && gender != 0) {
-                System.out.println("Wrong input, re input (0.Female/1.Male)");
+            if (gender != 1 && gender != 2) {
+                System.out.println("Wrong input, re input (1.Male/2.Female)");
             }
             scanner.nextLine();
-        } while (gender != 1 && gender != 0);
+        } while (gender != 1 && gender != 2);
         System.out.println("Enter customer address");
         String address = scanner.nextLine();
         System.out.println("Enter customer job");
@@ -59,7 +64,9 @@ public class CustomerManagement {
         return new Customer(cusID, name, age, gender, address, job, phone);
     }
 
-    public Customer searchCustomer(String cusID) {
+    public Customer searchCustomerByID() {
+        System.out.println("Enter searching customer ID");
+        String cusID = scanner.nextLine();
         keys = customerMap.keySet();
         for (String key : keys) {
             if (key.equals(cusID))
@@ -68,7 +75,9 @@ public class CustomerManagement {
         return null;
     }
 
-    public List<Customer> searchCustomerByName(String name) {
+    public void searchCustomerByName() {
+        System.out.println("Enter searching name");
+        String name = scanner.nextLine();
         keys = customerMap.keySet();
         customerList = new LinkedList<>();
         for (String key : keys) {
@@ -76,12 +85,13 @@ public class CustomerManagement {
                 customerList.add(customerMap.get(key));
             }
         }
-        if (customerList.size() != 0)
-            return customerList;
-        return null;
+        displayCustomerList();
     }
 
-    public List<Customer> searchCustomerByAge(int age) {
+    public void searchCustomerByAge() {
+        System.out.println("Enter searching age");
+        int age = scanner.nextInt();
+        scanner.nextLine();
         keys = customerMap.keySet();
         customerList = new LinkedList<>();
         for (String key : keys) {
@@ -89,31 +99,120 @@ public class CustomerManagement {
                 customerList.add(customerMap.get(key));
             }
         }
-        if (customerList.size() != 0)
-            return customerList;
-        return null;
+        displayCustomerList();
     }
 
-    public List<Customer> searchCustomerByGender(int gender) {
+    public void searchCustomerByGender() {
+        System.out.println("Enter searching gender");
+        String sex = scanner.nextLine();
+        int gender = 0;
+        if (sex.equals("nam")) {
+            gender = 1;
+        } else if (sex.equals("nữ")) {
+            gender = 2;
+        }
         keys = customerMap.keySet();
         customerList = new LinkedList<>();
         for (String key : keys) {
-            if (customerMap.get(key).getAge() == gender) {
+            if (customerMap.get(key).getGender() == gender) {
                 customerList.add(customerMap.get(key));
             }
         }
-        if (customerList.size() != 0)
-            return customerList;
-        return null;
+        displayCustomerList();
     }
 
+    public void searchCustomerByAddress() {
+        System.out.println("Enter searching address:");
+        String address = scanner.nextLine();
+        keys = customerMap.keySet();
+        customerList = new LinkedList<>();
+        for (String key : keys) {
+            if (customerMap.get(key).getAddress().equals(address)) {
+                customerList.add(customerMap.get(key));
+            }
+        }
+        displayCustomerList();
+    }
+
+    public void searchCustomerByJob() {
+        System.out.println("Enter searching job");
+        String job = scanner.nextLine();
+        keys = customerMap.keySet();
+        customerList = new LinkedList<>();
+        for (String key : keys) {
+            if (customerMap.get(key).getJob().equals(job)) {
+                customerList.add(customerMap.get(key));
+            }
+        }
+        displayCustomerList();
+    }
+
+    public void sortByID() {
+        List<Map.Entry<String, Customer>> lists = new ArrayList<>(customerMap.entrySet());
+        Collections.sort(lists, new Comparator<Map.Entry<String, Customer>>() {
+            @Override
+            public int compare(Map.Entry<String, Customer> customer1, Map.Entry<String, Customer> customer2) {
+                return customer1.getValue().getCusId().compareTo(customer2.getValue().getCusId());
+            }
+        });
+        Map<String, Customer> listCustomer = new LinkedHashMap<>();
+        for (Map.Entry<String, Customer> list : lists) {
+            listCustomer.put(list.getKey(), list.getValue());
+        }
+        this.customerMap = listCustomer;
+    }
 
     public void sortByName() {
-        List<Map.Entry<String, Customer>> lists = new LinkedList(customerMap.entrySet());
+        List<Map.Entry<String, Customer>> lists = new ArrayList<>(customerMap.entrySet());
         Collections.sort(lists, new Comparator<Map.Entry<String, Customer>>() {
             @Override
             public int compare(Map.Entry<String, Customer> customer1, Map.Entry<String, Customer> customer2) {
                 return customer1.getValue().getName().compareTo(customer2.getValue().getName());
+            }
+        });
+        Map<String, Customer> listCustomer = new LinkedHashMap<>();
+        for (Map.Entry<String, Customer> list : lists) {
+            listCustomer.put(list.getKey(), list.getValue());
+        }
+        this.customerMap = listCustomer;
+    }
+
+    public void sortByAge() {
+        List<Map.Entry<String, Customer>> lists = new ArrayList<>(customerMap.entrySet());
+        Collections.sort(lists, new Comparator<Map.Entry<String, Customer>>() {
+            @Override
+            public int compare(Map.Entry<String, Customer> o1, Map.Entry<String, Customer> o2) {
+                return o1.getValue().getAge() - o2.getValue().getAge();
+            }
+        });
+        Map<String, Customer> listCustomer = new LinkedHashMap<>();
+        for (Map.Entry<String, Customer> list : lists) {
+            listCustomer.put(list.getKey(), list.getValue());
+        }
+        this.customerMap = listCustomer;
+    }
+
+    public void sortByAddress() {
+        List<Map.Entry<String, Customer>> lists = new ArrayList<>(customerMap.entrySet());
+        Collections.sort(lists, new Comparator<Map.Entry<String, Customer>>() {
+            @Override
+            public int compare(Map.Entry<String, Customer> customer1, Map.Entry<String, Customer> customer2) {
+                return customer1.getValue().getAddress().compareTo(customer2.getValue().getAddress());
+            }
+        });
+        Map<String, Customer> listCustomer = new LinkedHashMap<>();
+        for (Map.Entry<String, Customer> list : lists) {
+            listCustomer.put(list.getKey(), list.getValue());
+        }
+        this.customerMap = listCustomer;
+    }
+
+    public void sortByJob() {
+        List<Map.Entry<String, Customer>> lists = new ArrayList<>(customerMap.entrySet());
+        Collections.sort(lists, new Comparator<Map.Entry<String, Customer>>() {
+            @Override
+            public int compare(Map.Entry<String, Customer> customer1, Map.Entry<String, Customer> customer2) {
+                return customer1.getValue().getJob().compareTo(customer2.getValue().getJob());
             }
         });
         Map<String, Customer> listCustomer = new LinkedHashMap<>();
@@ -143,14 +242,14 @@ public class CustomerManagement {
     public void editGender(Customer customer) {
         int gender;
         do {
-            System.out.println("Enter gender (0.Female/1.Male):");
+            System.out.println("Enter gender (1.Male/2.Female):");
             gender = scanner.nextInt();
-            if (gender == 1 || gender == 0) {
+            if (gender == 1 || gender == 2) {
                 customer.setGender(gender);
             } else {
                 System.out.println("Wrong input, re input");
             }
-        } while (gender != 1 && gender != 0);
+        } while (gender != 1 && gender != 2);
         scanner.nextLine();
     }
 
@@ -194,13 +293,11 @@ public class CustomerManagement {
     }
 
     public void deleteCustomerByID() {
-        System.out.println("Enter customer ID:");
-        String cusId = scanner.nextLine();
-        Customer customer = searchCustomer(cusId);
+        Customer customer = searchCustomerByID();
         if (customer == null) {
             System.out.println("No information!");
         } else {
-            customerMap.remove(cusId);
+            customerMap.remove(customer.getCusId());
         }
     }
 

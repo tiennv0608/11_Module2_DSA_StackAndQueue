@@ -81,7 +81,7 @@ public class Customer {
         String sex = "";
         if (getGender() == 1) {
             sex = "nam";
-        } else {
+        } else if (getGender() == 2) {
             sex = "nữ";
         }
         return "Customer{" +
