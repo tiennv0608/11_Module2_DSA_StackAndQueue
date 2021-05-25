@@ -21,7 +21,7 @@ public class Main {
                         case 1:
                             Customer customer = customerManagement.searchCustomerByID();
                             if (customer == null) {
-                                System.out.println("No information");
+                                System.out.println("No information!");
                             } else {
                                 System.out.println(customer);
                             }
@@ -66,13 +66,13 @@ public class Main {
                             customerManagement.sortByJob();
                             break;
                         default:
-                            System.out.println("Invalid");
+                            System.out.println("Invalid!");
                     }
                     break;
                 case 4:
                     Customer customer = customerManagement.searchCustomerByID();
                     if (customer == null) {
-                        System.out.println("No information");
+                        System.out.println("No information!");
                     } else {
                         System.out.println(customer);
                         editingMenu();
@@ -101,7 +101,7 @@ public class Main {
                                 customerManagement.editInformation(customer);
                                 break;
                             default:
-                                System.out.println("Invalid");
+                                System.out.println("Invalid!");
                         }
                     }
                     break;

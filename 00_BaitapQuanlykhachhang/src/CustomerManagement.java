@@ -15,6 +15,37 @@ public class CustomerManagement {
         customerMap.put(customer.getCusId(), customer);
     }
 
+    public Customer createCustomer() {
+        System.out.println("Enter customer ID:");
+        String cusID = scanner.nextLine();
+        System.out.println("Enter customer name:");
+        String name = scanner.nextLine();
+        System.out.println("Enter customer age:");
+        int age = scanner.nextInt();
+        int gender;
+        do {
+            System.out.println("Enter customer gender (1.Male/2.Female):");
+            gender = scanner.nextInt();
+            if (gender != 1 && gender != 2) {
+                System.out.println("Wrong input, re input (1.Male/2.Female):");
+            }
+            scanner.nextLine();
+        } while (gender != 1 && gender != 2);
+        System.out.println("Enter customer address:");
+        String address = scanner.nextLine();
+        System.out.println("Enter customer job:");
+        String job = scanner.nextLine();
+        String phone;
+        do {
+            System.out.println("Enter customer phone:");
+            phone = scanner.nextLine();
+            if (phone.length() != 10) {
+                System.out.println("Wrong input, re input (10 letter):");
+            }
+        } while (phone.length() != 10);
+        return new Customer(cusID, name, age, gender, address, job, phone);
+    }
+
     public void display() {
         keys = customerMap.keySet();
         for (String key : keys) {
@@ -32,39 +63,8 @@ public class CustomerManagement {
         }
     }
 
-    public Customer createCustomer() {
-        System.out.println("Enter customer ID");
-        String cusID = scanner.nextLine();
-        System.out.println("Enter customer name");
-        String name = scanner.nextLine();
-        System.out.println("Enter customer age");
-        int age = scanner.nextInt();
-        int gender;
-        do {
-            System.out.println("Enter customer gender (1.Male/2.Female)");
-            gender = scanner.nextInt();
-            if (gender != 1 && gender != 2) {
-                System.out.println("Wrong input, re input (1.Male/2.Female)");
-            }
-            scanner.nextLine();
-        } while (gender != 1 && gender != 2);
-        System.out.println("Enter customer address");
-        String address = scanner.nextLine();
-        System.out.println("Enter customer job");
-        String job = scanner.nextLine();
-        String phone;
-        do {
-            System.out.println("Enter customer phone");
-            phone = scanner.nextLine();
-            if (phone.length() != 10) {
-                System.out.println("Wrong input, re input (10 letter)");
-            }
-        } while (phone.length() != 10);
-        return new Customer(cusID, name, age, gender, address, job, phone);
-    }
-
     public Customer searchCustomerByID() {
-        System.out.println("Enter searching customer ID");
+        System.out.println("Enter searching ID:");
         String cusID = scanner.nextLine();
         keys = customerMap.keySet();
         for (String key : keys) {
@@ -75,7 +75,7 @@ public class CustomerManagement {
     }
 
     public void searchCustomerByName() {
-        System.out.println("Enter searching name");
+        System.out.println("Enter searching name:");
         String name = scanner.nextLine();
         keys = customerMap.keySet();
         customerList = new LinkedList<>();
@@ -88,7 +88,7 @@ public class CustomerManagement {
     }
 
     public void searchCustomerByAge() {
-        System.out.println("Enter searching age");
+        System.out.println("Enter searching age:");
         int age = scanner.nextInt();
         scanner.nextLine();
         keys = customerMap.keySet();
@@ -102,7 +102,7 @@ public class CustomerManagement {
     }
 
     public void searchCustomerByGender() {
-        System.out.println("Enter searching gender");
+        System.out.println("Enter searching gender:");
         String sex = scanner.nextLine();
         int gender = 0;
         if (sex.equals("nam")) {
@@ -134,7 +134,7 @@ public class CustomerManagement {
     }
 
     public void searchCustomerByJob() {
-        System.out.println("Enter searching job");
+        System.out.println("Enter searching job:");
         String job = scanner.nextLine();
         keys = customerMap.keySet();
         customerList = new LinkedList<>();
@@ -246,14 +246,14 @@ public class CustomerManagement {
             if (gender == 1 || gender == 2) {
                 customer.setGender(gender);
             } else {
-                System.out.println("Wrong input, re input");
+                System.out.println("Wrong input, re input (1.Male/2.Female):");
             }
         } while (gender != 1 && gender != 2);
         scanner.nextLine();
     }
 
     public void editAddress(Customer customer) {
-        System.out.println("Enter address");
+        System.out.println("Enter address:");
         String address = scanner.nextLine();
         if (!address.equals("")) {
             customer.setAddress(address);
@@ -261,7 +261,7 @@ public class CustomerManagement {
     }
 
     public void editJob(Customer customer) {
-        System.out.println("Enter job");
+        System.out.println("Enter job:");
         String job = scanner.nextLine();
         if (!job.equals("")) {
             customer.setJob(job);
@@ -269,7 +269,7 @@ public class CustomerManagement {
     }
 
     public void editPhone(Customer customer) {
-        System.out.println("Enter phone");
+        System.out.println("Enter phone:");
         String phone = scanner.nextLine();
         if (!phone.equals("")) {
             if (phone.length() < 10) {
