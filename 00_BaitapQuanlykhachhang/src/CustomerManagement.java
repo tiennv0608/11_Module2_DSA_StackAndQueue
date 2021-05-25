@@ -12,15 +12,14 @@ public class CustomerManagement {
 
     public void add() {
         Customer customer = createCustomer();
-        customerMap.put(customer.getCusId(), customer);
-    }
+        customerMap.put(customer.getCusId(), customer);}
 
     public void display() {
         keys = customerMap.keySet();
         for (String key : keys) {
             System.out.println(customerMap.get(key));
         }
-    }
+  }
 
     public void displayCustomerList() {
         if (customerList.size() != 0) {
@@ -31,7 +30,7 @@ public class CustomerManagement {
             System.out.println("No Information!");
         }
 
-    }
+ }
 
     public Customer createCustomer() {
         System.out.println("Enter customer ID");
@@ -62,7 +61,7 @@ public class CustomerManagement {
             }
         } while (phone.length() != 10);
         return new Customer(cusID, name, age, gender, address, job, phone);
-    }
+  }
 
     public Customer searchCustomerByID() {
         System.out.println("Enter searching customer ID");
@@ -73,7 +72,7 @@ public class CustomerManagement {
                 return customerMap.get(key);
         }
         return null;
-    }
+   }
 
     public void searchCustomerByName() {
         System.out.println("Enter searching name");
@@ -85,8 +84,7 @@ public class CustomerManagement {
                 customerList.add(customerMap.get(key));
             }
         }
-        displayCustomerList();
-    }
+        displayCustomerList();}
 
     public void searchCustomerByAge() {
         System.out.println("Enter searching age");
@@ -99,8 +97,7 @@ public class CustomerManagement {
                 customerList.add(customerMap.get(key));
             }
         }
-        displayCustomerList();
-    }
+        displayCustomerList();}
 
     public void searchCustomerByGender() {
         System.out.println("Enter searching gender");

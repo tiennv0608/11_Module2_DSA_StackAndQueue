@@ -49,7 +49,7 @@ public class Main {
                     sortingMenu();
                     option = scanner.nextInt();
                     scanner.nextLine();
-                    switch (option){
+                    switch (option) {
                         case 1:
                             customerManagement.sortByID();
                             break;
@@ -153,7 +153,8 @@ public class Main {
         System.out.println("7. Edit whole information");
         System.out.println("Enter your option");
     }
-    static void sortingMenu(){
+
+    static void sortingMenu() {
         System.out.println("Sorting menu");
         System.out.println("1. Sorting customer by ID");
         System.out.println("2. Sorting customer by name");
