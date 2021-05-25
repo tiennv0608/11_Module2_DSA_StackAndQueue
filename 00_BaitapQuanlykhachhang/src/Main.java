@@ -74,6 +74,7 @@ public class Main {
                     if (customer == null) {
                         System.out.println("No information");
                     } else {
+                        System.out.println(customer);
                         editingMenu();
                         option = scanner.nextInt();
                         scanner.nextLine();
