@@ -10,6 +10,10 @@ public class CustomerManagement {
         customerMap = new HashMap<>();
     }
 
+    public Map<String, Customer> getCustomerMap() {
+        return customerMap;
+    }
+
     public void add() {
         Customer customer = createCustomer();
         customerMap.put(customer.getCusId(), customer);
