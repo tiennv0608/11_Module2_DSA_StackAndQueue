@@ -19,9 +19,25 @@ public class CustomerManagement {
         customerMap.put(customer.getCusId(), customer);
     }
 
+    public boolean checkCustomerID(String cusID) {
+        keys = customerMap.keySet();
+        for (String key : keys) {
+            if (customerMap.get(key).getCusId().equals(cusID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Customer createCustomer() {
-        System.out.println("Enter customer ID:");
-        String cusID = scanner.nextLine();
+        String cusID;
+        do {
+            System.out.println("Enter customer ID:");
+            cusID = scanner.nextLine();
+            if (checkCustomerID(cusID)) {
+                System.out.println("Duplicated customer ID, re input:");
+            }
+        } while (checkCustomerID(cusID));
         System.out.println("Enter customer name:");
         String name = scanner.nextLine();
         System.out.println("Enter customer age:");
