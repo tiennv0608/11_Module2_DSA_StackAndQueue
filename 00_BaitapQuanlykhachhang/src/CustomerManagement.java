@@ -200,8 +200,8 @@ public class CustomerManagement {
         List<Map.Entry<String, Customer>> lists = new ArrayList<>(customerMap.entrySet());
         Collections.sort(lists, new Comparator<Map.Entry<String, Customer>>() {
             @Override
-            public int compare(Map.Entry<String, Customer> o1, Map.Entry<String, Customer> o2) {
-                return o1.getValue().getAge() - o2.getValue().getAge();
+            public int compare(Map.Entry<String, Customer> customer1, Map.Entry<String, Customer> customer2) {
+                return customer1.getValue().getAge() - customer2.getValue().getAge();
             }
         });
         Map<String, Customer> listCustomer = new LinkedHashMap<>();
