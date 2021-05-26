@@ -317,18 +317,19 @@ public class CustomerManagement {
             System.out.println("No information!");
         } else {
             System.out.println(customer);
-            confirmDelete(customer);
+            confirmDeleteCustomer(customer);
         }
     }
-    public void confirmDelete(Customer customer){
+
+    public void confirmDeleteCustomer(Customer customer) {
         String confirm;
         do {
             System.out.println("Do you want to delete this customer (Y/N)");
             confirm = scanner.nextLine();
-            if (confirm.equals("Y")){
+            if (confirm.equals("Y")) {
                 customerMap.remove(customer.getCusId());
                 System.out.println("Your customer was deleted!");
-            } else if (confirm.equals("N")){
+            } else if (confirm.equals("N")) {
                 System.out.println("Your customer was not deleted!");
             } else {
                 System.out.println("Wrong input, re input:");
