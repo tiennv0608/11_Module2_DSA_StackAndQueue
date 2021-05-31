@@ -22,6 +22,7 @@ public class CustomerManagement {
     public void add() {
         Customer customer = createCustomer();
         customerMap.put(customer.getCusId(), customer);
+        writeFile("customermanagement.csv");
     }
 
     public boolean checkCustomerID(String cusID) {
@@ -46,17 +47,17 @@ public class CustomerManagement {
         System.out.print("Enter customer name: ");
         String name = scanner.nextLine();
         System.out.print("Enter customer age: ");
-        int age = -1;
-        int age1 = checkInputType(age);
-        int gender = -1;
-        int gender1;
+        int value = -1;
+        int age = checkInputType(value);
+        value = -1;
+        int gender;
         do {
             System.out.print("Enter customer gender (1.Male/2.Female): ");
-            gender1 = checkInputType(gender);
-            if (gender1 != 1 && gender1 != 2) {
+            gender = checkInputType(value);
+            if (gender != 1 && gender != 2) {
                 System.out.print("Wrong input, re input (1.Male/2.Female): ");
             }
-        } while (gender1 != 1 && gender1 != 2);
+        } while (gender != 1 && gender != 2);
         System.out.print("Enter customer address: ");
         String address = scanner.nextLine();
         System.out.print("Enter customer job: ");
@@ -69,7 +70,7 @@ public class CustomerManagement {
                 System.err.print("Wrong input, re input (10 letter): ");
             }
         } while (phone.length() != 10);
-        return new Customer(cusID, name, age1, gender1, address, job, phone);
+        return new Customer(cusID, name, age, gender, address, job, phone);
     }
 
     public void display() {
@@ -185,6 +186,7 @@ public class CustomerManagement {
             listCustomer.put(list.getKey(), list.getValue());
         }
         this.customerMap = listCustomer;
+        writeFile("customermanagement.csv");
     }
 
     public void sortByName() {
@@ -200,6 +202,7 @@ public class CustomerManagement {
             listCustomer.put(list.getKey(), list.getValue());
         }
         this.customerMap = listCustomer;
+        writeFile("customermanagement.csv");
     }
 
     public void sortByAge() {
@@ -215,6 +218,7 @@ public class CustomerManagement {
             listCustomer.put(list.getKey(), list.getValue());
         }
         this.customerMap = listCustomer;
+        writeFile("customermanagement.csv");
     }
 
     public void sortByAddress() {
@@ -230,6 +234,7 @@ public class CustomerManagement {
             listCustomer.put(list.getKey(), list.getValue());
         }
         this.customerMap = listCustomer;
+        writeFile("customermanagement.csv");
     }
 
     public void sortByJob() {
@@ -245,6 +250,7 @@ public class CustomerManagement {
             listCustomer.put(list.getKey(), list.getValue());
         }
         this.customerMap = listCustomer;
+        writeFile("customermanagement.csv");
     }
 
     public void editName(Customer customer) {
@@ -253,29 +259,32 @@ public class CustomerManagement {
         if (!name.equals("")) {
             customer.setName(name);
         }
+        writeFile("customermanagement.csv");
     }
 
     public void editAge(Customer customer) {
         System.out.print("Enter age: ");
-        int age = scanner.nextInt();
-        scanner.nextLine();
+        int value = -1;
+        int age = checkInputType(value);
         if (age > 0 && age <= 100) {
             customer.setAge(age);
         }
+        writeFile("customermanagement.csv");
     }
 
     public void editGender(Customer customer) {
         int gender;
         do {
             System.out.print("Enter gender (1.Male/2.Female): ");
-            gender = scanner.nextInt();
+            int value = -1;
+            gender = checkInputType(value);
             if (gender == 1 || gender == 2) {
                 customer.setGender(gender);
             } else {
                 System.out.print("Wrong input, re input (1.Male/2.Female): ");
             }
         } while (gender != 1 && gender != 2);
-        scanner.nextLine();
+        writeFile("customermanagement.csv");
     }
 
     public void editAddress(Customer customer) {
@@ -284,6 +293,7 @@ public class CustomerManagement {
         if (!address.equals("")) {
             customer.setAddress(address);
         }
+        writeFile("customermanagement.csv");
     }
 
     public void editJob(Customer customer) {
@@ -292,6 +302,7 @@ public class CustomerManagement {
         if (!job.equals("")) {
             customer.setJob(job);
         }
+        writeFile("customermanagement.csv");
     }
 
     public void editPhone(Customer customer) {
@@ -299,13 +310,14 @@ public class CustomerManagement {
         String phone = scanner.nextLine();
         if (!phone.equals("")) {
             if (phone.length() < 10) {
-                System.out.print("Number phone too short, re input (10 numbers): ");
+                System.err.print("Number phone too short, re input (10 numbers): ");
             } else if (phone.length() > 10) {
-                System.out.print("Number phone too long, re input (10 numbers): ");
+                System.err.print("Number phone too long, re input (10 numbers): ");
             } else {
                 customer.setPhone(phone);
             }
         }
+        writeFile("customermanagement.csv");
     }
 
     public void editInformation(Customer customer) {
@@ -315,6 +327,7 @@ public class CustomerManagement {
         editAddress(customer);
         editJob(customer);
         editPhone(customer);
+        writeFile("customermanagement.csv");
     }
 
     public void deleteCustomerByID() {
@@ -325,6 +338,7 @@ public class CustomerManagement {
             System.out.print(customer);
             confirmDeleteCustomer(customer);
         }
+        writeFile("customermanagement.csv");
     }
 
     public void confirmDeleteCustomer(Customer customer) {
@@ -332,15 +346,15 @@ public class CustomerManagement {
         do {
             System.out.print("Do you want to delete this customer (Y/N): ");
             confirm = scanner.nextLine();
-            if (confirm.equals("Y")) {
+            if (confirm.equalsIgnoreCase("Y")) {
                 customerMap.remove(customer.getCusId());
                 System.out.print("Your customer was deleted!");
-            } else if (confirm.equals("N")) {
+            } else if (confirm.equalsIgnoreCase("N")) {
                 System.out.print("Your customer was not deleted!");
             } else {
                 System.out.print("Wrong input, re input: ");
             }
-        } while (!confirm.equals("Y") && !confirm.equals("N"));
+        } while (!confirm.equalsIgnoreCase("Y") && !confirm.equalsIgnoreCase("N"));
     }
 
     public int changeGender(String sex) {
@@ -374,9 +388,15 @@ public class CustomerManagement {
             fw = new FileWriter(path);
             bw = new BufferedWriter(fw);
             for (String key : keys) {
+                String gender = "";
+                if (customerMap.get(key).getGender() == 1) {
+                    gender = "Nam";
+                } else if (customerMap.get(key).getGender() == 2) {
+                    gender = "Nu";
+                }
                 bw.write(customerMap.get(key).getCusId() + "," + customerMap.get(key).getName() + "," + customerMap.get(key).getAge() +
-                        "," + customerMap.get(key).getGender() + "," + customerMap.get(key).getAddress() + "," + customerMap.get(key).getJob() +
-                        "," + customerMap.get(key).getPhone());
+                        "," + gender + "," + customerMap.get(key).getAddress() + "," + customerMap.get(key).getJob() +
+                        "," + customerMap.get(key).getPhone() + "\n");
             }
             bw.close();
             fw.close();

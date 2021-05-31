@@ -2,9 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
         CustomerManagement customerManagement = new CustomerManagement();
-
         do {
             int choice = -1;
             int option = -1;
@@ -127,7 +125,7 @@ public class Main {
         System.out.println("5. Display list customer");
         System.out.println("6. Delete customer");
         System.out.println("0. Exit");
-        System.out.println("Enter your choice:");
+        System.out.print("Enter your choice: ");
     }
 
     static void searchingMenu() {
@@ -138,7 +136,7 @@ public class Main {
         System.out.println("4. Search customer by gender");
         System.out.println("5. Search customer by address");
         System.out.println("6. Search customer by job");
-        System.out.println("Enter your option");
+        System.out.print("Enter your option: ");
     }
 
     static void editingMenu() {
@@ -150,7 +148,7 @@ public class Main {
         System.out.println("5. Edit job");
         System.out.println("6. Edit phone");
         System.out.println("7. Edit whole information");
-        System.out.println("Enter your option");
+        System.out.print("Enter your option: ");
     }
 
     static void sortingMenu() {
@@ -160,6 +158,6 @@ public class Main {
         System.out.println("3. Sorting customer by age");
         System.out.println("4. Sorting customer by address");
         System.out.println("5. Sorting customer by job");
-        System.out.println("Enter your option");
+        System.out.print("Enter your option: ");
     }
 }
