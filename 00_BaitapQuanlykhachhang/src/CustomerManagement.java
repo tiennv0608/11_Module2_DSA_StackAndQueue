@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class CustomerManagement {
@@ -346,11 +343,11 @@ public class CustomerManagement {
         } while (!confirm.equals("Y") && !confirm.equals("N"));
     }
 
-    public int changeGender(String sex){
+    public int changeGender(String sex) {
         int gender = 0;
-        if (sex.equalsIgnoreCase("Nam")){
+        if (sex.equalsIgnoreCase("Nam")) {
             gender = 1;
-        } else if (sex.equalsIgnoreCase("Nu")){
+        } else if (sex.equalsIgnoreCase("Nu")) {
             gender = 2;
         }
         return gender;
@@ -359,18 +356,36 @@ public class CustomerManagement {
     public Map<String, Customer> readFile(String path) throws IOException {
         FileReader fr = new FileReader(path);
         BufferedReader br = new BufferedReader(fr);
-        Map<String,Customer> map = new HashMap<>();
+        Map<String, Customer> map = new HashMap<>();
         String line;
-        while ((line = br.readLine()) != null){
+        while ((line = br.readLine()) != null) {
             String[] str = line.split(",");
-            map.put(str[0],new Customer(str[0],str[1],Integer.parseInt(str[2]),changeGender(str[3]),str[4],str[5],str[6]));
+            map.put(str[0], new Customer(str[0], str[1], Integer.parseInt(str[2]), changeGender(str[3]), str[4], str[5], str[6]));
         }
         br.close();
         fr.close();
         return map;
     }
 
-    public int checkInputType(int choice){
+    public void writeFile(String path) {
+        FileWriter fw;
+        BufferedWriter bw;
+        try {
+            fw = new FileWriter(path);
+            bw = new BufferedWriter(fw);
+            for (String key : keys) {
+                bw.write(customerMap.get(key).getCusId() + "," + customerMap.get(key).getName() + "," + customerMap.get(key).getAge() +
+                        "," + customerMap.get(key).getGender() + "," + customerMap.get(key).getAddress() + "," + customerMap.get(key).getJob() +
+                        "," + customerMap.get(key).getPhone());
+            }
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            System.err.println("Khong tim thay file");
+        }
+    }
+
+    public int checkInputType(int choice) {
         while (choice == -1) {
             try {
                 choice = scanner.nextInt();
