@@ -2,22 +2,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+//        Scanner scanner = new Scanner(System.in);
         CustomerManagement customerManagement = new CustomerManagement();
-        int choice, option;
+
         do {
+            int choice = -1;
+            int option = -1;
             customerManagementMenu();
-            choice = scanner.nextInt();
-            scanner.nextLine();
-            switch (choice) {
+            int choice1 = customerManagement.checkInputType(choice);
+            switch (choice1) {
                 case 1:
                     customerManagement.add();
                     break;
                 case 2:
                     searchingMenu();
-                    option = scanner.nextInt();
-                    scanner.nextLine();
-                    switch (option) {
+                    int option1 = customerManagement.checkInputType(option);
+                    switch (option1) {
                         case 1:
                             Customer customer = customerManagement.searchCustomerByID();
                             if (customer == null) {
@@ -47,9 +47,8 @@ public class Main {
                     break;
                 case 3:
                     sortingMenu();
-                    option = scanner.nextInt();
-                    scanner.nextLine();
-                    switch (option) {
+                    option1 = customerManagement.checkInputType(option);
+                    switch (option1) {
                         case 1:
                             customerManagement.sortByID();
                             break;
@@ -76,9 +75,8 @@ public class Main {
                     } else {
                         System.out.println(customer);
                         editingMenu();
-                        option = scanner.nextInt();
-                        scanner.nextLine();
-                        switch (option) {
+                        option1 = customerManagement.checkInputType(option);
+                        switch (option1) {
                             case 1:
                                 customerManagement.editName(customer);
                                 break;

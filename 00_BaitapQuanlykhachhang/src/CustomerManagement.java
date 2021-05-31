@@ -14,7 +14,7 @@ public class CustomerManagement {
         try {
             customerMap = readFile("customer.csv");
         } catch (IOException e) {
-            System.err.println("File loi");
+            System.err.print("File loi");
         }
     }
 
@@ -39,39 +39,40 @@ public class CustomerManagement {
 
     public Customer createCustomer() {
         String cusID;
+        System.out.print("Enter customer ID: ");
         do {
-            System.out.println("Enter customer ID:");
             cusID = scanner.nextLine();
             if (checkCustomerID(cusID)) {
-                System.out.println("Duplicated customer ID, re input:");
+                System.err.print("Duplicated customer ID, re input: ");
             }
         } while (checkCustomerID(cusID));
-        System.out.println("Enter customer name:");
+        System.out.print("Enter customer name: ");
         String name = scanner.nextLine();
-        System.out.println("Enter customer age:");
-        int age = scanner.nextInt();
-        int gender;
+        System.out.print("Enter customer age: ");
+        int age = -1;
+        int age1 = checkInputType(age);
+        int gender = -1;
+        int gender1;
         do {
-            System.out.println("Enter customer gender (1.Male/2.Female):");
-            gender = scanner.nextInt();
-            if (gender != 1 && gender != 2) {
-                System.out.println("Wrong input, re input (1.Male/2.Female):");
+            System.out.print("Enter customer gender (1.Male/2.Female): ");
+            gender1 = checkInputType(gender);
+            if (gender1 != 1 && gender1 != 2) {
+                System.out.print("Wrong input, re input (1.Male/2.Female): ");
             }
-            scanner.nextLine();
-        } while (gender != 1 && gender != 2);
-        System.out.println("Enter customer address:");
+        } while (gender1 != 1 && gender1 != 2);
+        System.out.print("Enter customer address: ");
         String address = scanner.nextLine();
-        System.out.println("Enter customer job:");
+        System.out.print("Enter customer job: ");
         String job = scanner.nextLine();
         String phone;
         do {
-            System.out.println("Enter customer phone:");
+            System.out.print("Enter customer phone: ");
             phone = scanner.nextLine();
             if (phone.length() != 10) {
-                System.out.println("Wrong input, re input (10 letter):");
+                System.err.print("Wrong input, re input (10 letter): ");
             }
         } while (phone.length() != 10);
-        return new Customer(cusID, name, age, gender, address, job, phone);
+        return new Customer(cusID, name, age1, gender1, address, job, phone);
     }
 
     public void display() {
@@ -87,12 +88,12 @@ public class CustomerManagement {
                 System.out.println(customer);
             }
         } else {
-            System.out.println("No Information!");
+            System.out.print("No Information!");
         }
     }
 
     public Customer searchCustomerByID() {
-        System.out.println("Enter searching ID:");
+        System.out.print("Enter searching ID: ");
         String cusID = scanner.nextLine();
         keys = customerMap.keySet();
         for (String key : keys) {
@@ -103,7 +104,7 @@ public class CustomerManagement {
     }
 
     public void searchCustomerByName() {
-        System.out.println("Enter searching name:");
+        System.out.print("Enter searching name: ");
         String name = scanner.nextLine();
         keys = customerMap.keySet();
         customerList = new LinkedList<>();
@@ -116,7 +117,7 @@ public class CustomerManagement {
     }
 
     public void searchCustomerByAge() {
-        System.out.println("Enter searching age:");
+        System.out.print("Enter searching age: ");
         int age = scanner.nextInt();
         scanner.nextLine();
         keys = customerMap.keySet();
@@ -130,7 +131,7 @@ public class CustomerManagement {
     }
 
     public void searchCustomerByGender() {
-        System.out.println("Enter searching gender:");
+        System.out.print("Enter searching gender: ");
         String sex = scanner.nextLine();
         int gender = 0;
         if (sex.equals("nam")) {
@@ -149,7 +150,7 @@ public class CustomerManagement {
     }
 
     public void searchCustomerByAddress() {
-        System.out.println("Enter searching address:");
+        System.out.print("Enter searching address: ");
         String address = scanner.nextLine();
         keys = customerMap.keySet();
         customerList = new LinkedList<>();
@@ -162,7 +163,7 @@ public class CustomerManagement {
     }
 
     public void searchCustomerByJob() {
-        System.out.println("Enter searching job:");
+        System.out.print("Enter searching job: ");
         String job = scanner.nextLine();
         keys = customerMap.keySet();
         customerList = new LinkedList<>();
@@ -250,7 +251,7 @@ public class CustomerManagement {
     }
 
     public void editName(Customer customer) {
-        System.out.println("Enter name:");
+        System.out.print("Enter name: ");
         String name = scanner.nextLine();
         if (!name.equals("")) {
             customer.setName(name);
@@ -258,7 +259,7 @@ public class CustomerManagement {
     }
 
     public void editAge(Customer customer) {
-        System.out.println("Enter age:");
+        System.out.print("Enter age: ");
         int age = scanner.nextInt();
         scanner.nextLine();
         if (age > 0 && age <= 100) {
@@ -269,19 +270,19 @@ public class CustomerManagement {
     public void editGender(Customer customer) {
         int gender;
         do {
-            System.out.println("Enter gender (1.Male/2.Female):");
+            System.out.print("Enter gender (1.Male/2.Female): ");
             gender = scanner.nextInt();
             if (gender == 1 || gender == 2) {
                 customer.setGender(gender);
             } else {
-                System.out.println("Wrong input, re input (1.Male/2.Female):");
+                System.out.print("Wrong input, re input (1.Male/2.Female): ");
             }
         } while (gender != 1 && gender != 2);
         scanner.nextLine();
     }
 
     public void editAddress(Customer customer) {
-        System.out.println("Enter address:");
+        System.out.print("Enter address: ");
         String address = scanner.nextLine();
         if (!address.equals("")) {
             customer.setAddress(address);
@@ -289,7 +290,7 @@ public class CustomerManagement {
     }
 
     public void editJob(Customer customer) {
-        System.out.println("Enter job:");
+        System.out.print("Enter job: ");
         String job = scanner.nextLine();
         if (!job.equals("")) {
             customer.setJob(job);
@@ -297,13 +298,13 @@ public class CustomerManagement {
     }
 
     public void editPhone(Customer customer) {
-        System.out.println("Enter phone:");
+        System.out.print("Enter phone: ");
         String phone = scanner.nextLine();
         if (!phone.equals("")) {
             if (phone.length() < 10) {
-                System.out.println("Number phone too short, re input (10 numbers):");
+                System.out.print("Number phone too short, re input (10 numbers): ");
             } else if (phone.length() > 10) {
-                System.out.println("Number phone too long, re input (10 numbers):");
+                System.out.print("Number phone too long, re input (10 numbers): ");
             } else {
                 customer.setPhone(phone);
             }
@@ -322,9 +323,9 @@ public class CustomerManagement {
     public void deleteCustomerByID() {
         Customer customer = searchCustomerByID();
         if (customer == null) {
-            System.out.println("No information!");
+            System.out.print("No information!");
         } else {
-            System.out.println(customer);
+            System.out.print(customer);
             confirmDeleteCustomer(customer);
         }
     }
@@ -332,15 +333,15 @@ public class CustomerManagement {
     public void confirmDeleteCustomer(Customer customer) {
         String confirm;
         do {
-            System.out.println("Do you want to delete this customer (Y/N)");
+            System.out.print("Do you want to delete this customer (Y/N): ");
             confirm = scanner.nextLine();
             if (confirm.equals("Y")) {
                 customerMap.remove(customer.getCusId());
-                System.out.println("Your customer was deleted!");
+                System.out.print("Your customer was deleted!");
             } else if (confirm.equals("N")) {
-                System.out.println("Your customer was not deleted!");
+                System.out.print("Your customer was not deleted!");
             } else {
-                System.out.println("Wrong input, re input:");
+                System.out.print("Wrong input, re input: ");
             }
         } while (!confirm.equals("Y") && !confirm.equals("N"));
     }
@@ -367,6 +368,20 @@ public class CustomerManagement {
         br.close();
         fr.close();
         return map;
+    }
+
+    public int checkInputType(int choice){
+        while (choice == -1) {
+            try {
+                choice = scanner.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.err.print("Wrong type, re enter: ");
+            } finally {
+                scanner.nextLine();
+            }
+        }
+        return choice;
     }
 
 }
