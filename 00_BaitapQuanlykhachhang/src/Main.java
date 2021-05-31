@@ -4,14 +4,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         CustomerManagement customerManagement = new CustomerManagement();
-        Customer customer1 = new Customer("CUS001", "Son", 22, 1, "Nam Dinh", "Sinh vien", "0987654567");
-        Customer customer2 = new Customer("CUS002", "Binh", 25, 2, "Ha Noi", "Sales", "0387354261");
-        Customer customer3 = new Customer("CUS003", "Hung", 19, 1, "Nam Dinh", "Cong nhan", "0389276536");
-        Customer customer4 = new Customer("CUS004", "Linh", 24, 2, "Hai Phong", "Ke toan", "0928736542");
-        customerManagement.getCustomerMap().put(customer1.getCusId(), customer1);
-        customerManagement.getCustomerMap().put(customer2.getCusId(), customer2);
-        customerManagement.getCustomerMap().put(customer3.getCusId(), customer3);
-        customerManagement.getCustomerMap().put(customer4.getCusId(), customer4);
         int choice, option;
         do {
             customerManagementMenu();

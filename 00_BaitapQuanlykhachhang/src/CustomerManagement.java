@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class CustomerManagement {
@@ -7,7 +11,11 @@ public class CustomerManagement {
     List<Customer> customerList = null;
 
     public CustomerManagement() {
-        customerMap = new HashMap<>();
+        try {
+            customerMap = readFile("customer.csv");
+        } catch (IOException e) {
+            System.err.println("File loi");
+        }
     }
 
     public Map<String, Customer> getCustomerMap() {
@@ -335,6 +343,30 @@ public class CustomerManagement {
                 System.out.println("Wrong input, re input:");
             }
         } while (!confirm.equals("Y") && !confirm.equals("N"));
+    }
+
+    public int changeGender(String sex){
+        int gender = 0;
+        if (sex.equalsIgnoreCase("Nam")){
+            gender = 1;
+        } else if (sex.equalsIgnoreCase("Nu")){
+            gender = 2;
+        }
+        return gender;
+    }
+
+    public Map<String, Customer> readFile(String path) throws IOException {
+        FileReader fr = new FileReader(path);
+        BufferedReader br = new BufferedReader(fr);
+        Map<String,Customer> map = new HashMap<>();
+        String line;
+        while ((line = br.readLine()) != null){
+            String[] str = line.split(",");
+            map.put(str[0],new Customer(str[0],str[1],Integer.parseInt(str[2]),changeGender(str[3]),str[4],str[5],str[6]));
+        }
+        br.close();
+        fr.close();
+        return map;
     }
 
 }

@@ -80,9 +80,9 @@ public class Customer {
     public String toString() {
         String sex = "";
         if (getGender() == 1) {
-            sex = "nam";
+            sex = "Nam";
         } else if (getGender() == 2) {
-            sex = "nữ";
+            sex = "Nu";
         }
         return "Customer{" +
                 "cusId: '" + cusId + '\'' +
