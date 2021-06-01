@@ -186,7 +186,6 @@ public class CustomerManagement {
             listCustomer.put(list.getKey(), list.getValue());
         }
         this.customerMap = listCustomer;
-        writeFile("customermanagement.csv");
     }
 
     public void sortByName() {
@@ -202,7 +201,6 @@ public class CustomerManagement {
             listCustomer.put(list.getKey(), list.getValue());
         }
         this.customerMap = listCustomer;
-        writeFile("customermanagement.csv");
     }
 
     public void sortByAge() {
@@ -218,7 +216,6 @@ public class CustomerManagement {
             listCustomer.put(list.getKey(), list.getValue());
         }
         this.customerMap = listCustomer;
-        writeFile("customermanagement.csv");
     }
 
     public void sortByAddress() {
@@ -234,7 +231,6 @@ public class CustomerManagement {
             listCustomer.put(list.getKey(), list.getValue());
         }
         this.customerMap = listCustomer;
-        writeFile("customermanagement.csv");
     }
 
     public void sortByJob() {
@@ -250,7 +246,6 @@ public class CustomerManagement {
             listCustomer.put(list.getKey(), list.getValue());
         }
         this.customerMap = listCustomer;
-        writeFile("customermanagement.csv");
     }
 
     public void editName(Customer customer) {
